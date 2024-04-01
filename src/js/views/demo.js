@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 import { Context } from "../store/appContext";
 
@@ -7,37 +8,39 @@ import "../../styles/demo.css";
 
 export const Demo = () => {
 	const { store, actions } = useContext(Context);
-
+	const [name,setName]= useState("")
+	const [address,setAddress]=useState("")
+	const [phoneNumber,setPhoneNumber]=useState("")
+	const [email,setEmail]=useState("")
+	const navigate = useNavigate()
+	
+	
+	
+	
 	return (
 		<div className="container">
-			<ul className="list-group">
-				{store.demo.map((item, index) => {
-					return (
-						<li
-							key={index}
-							className="list-group-item d-flex justify-content-between"
-							style={{ background: item.background }}>
-							<Link to={"/single/" + index}>
-								<span>Link to: {item.title}</span>
-							</Link>
-							{// Conditional render example
-							// Check to see if the background is orange, if so, display the message
-							item.background === "orange" ? (
-								<p style={{ color: item.initial }}>
-									Check store/flux.js scroll to the actions to see the code
-								</p>
-							) : null}
-							<button className="btn btn-success" onClick={() => actions.changeColor(index, "orange")}>
-								Change Color
-							</button>
-						</li>
-					);
-				})}
-			</ul>
-			<br />
-			<Link to="/">
-				<button className="btn btn-primary">Back home</button>
-			</Link>
+			<h1>Add a contact to your list</h1>
+			<div className="mb-3">
+  				<label className="form-label">Name</label>
+  				<input type="text" className="form-control" value={name} onChange={(e)=>setName(e.target.value)} />
+			</div>
+			<div className="mb-3">
+  				<label className="form-label">Address</label>
+  				<input type="text" className="form-control" value={address} onChange={(e)=>setAddress(e.target.value)} />
+			</div>
+			<div className="mb-3">
+  				<label className="form-label">Phone Number</label>
+  				<input type="text" className="form-control" value={phoneNumber} onChange={(e)=>setPhoneNumber(e.target.value)} />
+			</div>
+			<div className="mb-3">
+  				<label className="form-label">E-mail</label>
+  				<input type="text" className="form-control" value={email} onChange={(e)=>setEmail(e.target.value)} />
+			</div>
+			<button type="button" className="btn btn-primary" onClick={()=>{actions.addToList(actions.addContact(name,address,phoneNumber,email))
+			navigate("/")}}>
+  				Add contact
+			</button>
+
 		</div>
 	);
 };

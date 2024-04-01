@@ -1,42 +1,52 @@
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
-			demo: [
-				{
-					title: "FIRST",
-					background: "white",
-					initial: "white"
-				},
-				{
-					title: "SECOND",
-					background: "white",
-					initial: "white"
-				}
-			]
+			contacts:[],
+			slug: "elio_slug"
 		},
 		actions: {
-			// Use getActions to call a function within a fuction
-			exampleFunction: () => {
-				getActions().changeColor(0, "green");
+			addContact: (name,address,phoneNumber,email)=>{
+				const store=getStore()
+				return({
+					name: name,
+					address: address,
+					phoneNumber: phoneNumber,
+					email: email
+				})
 			},
-			loadSomeData: () => {
-				/**
-					fetch().then().then(data => setStore({ "foo": data.bar }))
-				*/
+			
+			addToList:(contact)=>{
+				const store=getStore()
+				const newContact = [...store.contacts,contact]
+				setStore({contacts:[newContact]})
+				fetch(`https://playground.4geeks.com/contact/agendas/elio_slug/contacts`, {
+					method: "POST",
+				   body: JSON.stringify(contact),
+				   headers: {"Content-Type": "application/json"}
+				   }).then(resp => {
+					   console.log(resp.ok);
+					   console.log(resp.status);
+					 return resp.json(); 
+				   }).then(data => {
+					   console.log(data); 
+				   }).catch(error => {
+					   console.log(error);
+				   });
+
 			},
-			changeColor: (index, color) => {
-				//get the store
-				const store = getStore();
-
-				//we have to loop the entire demo array to look for the respective index
-				//and change its color
-				const demo = store.demo.map((elm, i) => {
-					if (i === index) elm.background = color;
-					return elm;
-				});
-
-				//reset the global store
-				setStore({ demo: demo });
+			getMyList: () => {
+				const store=getStore()
+				fetch("https://playground.4geeks.com/contact/agendas/elio_slug/contacts", {
+                    method: "get",
+                   headers: {"Content-Type": "application/json"}
+                   }).then(resp => {
+                       console.log(resp.ok);
+                       console.log(resp.status);
+                     return resp.json(); 
+                   }).then(list => {
+                       setStore({contacts:[...store.contacts, ...list.contacts]})
+                   }).catch(error => {});
+				   
 			}
 		}
 	};
