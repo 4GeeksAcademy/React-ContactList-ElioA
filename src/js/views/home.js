@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
-import PropTypes from "prop-types";
-import { Link, useParams,Navigate, useNavigate } from "react-router-dom";
+import DeleterModal from "../component/modal";
+import { useNavigate } from "react-router-dom";
 import { Context } from "../store/appContext";
 import "../../styles/home.css";
 
@@ -25,7 +25,7 @@ export const Home = () => {
 			<div className="position-absolute top-0 end-0 buttons">
 				<button className="btn btn-outline-secondary contactButton" onClick={()=>{actions.saveContactOnStore(item.name,item.address,item.phone,item.email,item.id)
 				navigate("/single")}}><i className="fas fa-pen-fancy"></i></button>
-				<button className="btn btn-outline-secondary contactButton" onClick={()=>actions.deleteContact(item.id)}><i className="fas fa-trash"></i></button>
+				<DeleterModal onClick={actions.saveContactOnStore(item.name,item.address,item.phone,item.email,item.id)}/>
 			</div>
 			
 		</div>))}

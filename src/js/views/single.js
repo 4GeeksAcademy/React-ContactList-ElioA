@@ -31,7 +31,7 @@ function Single() {
 			</div>
 			<div className="mb-3">
   				<label className="form-label">E-mail</label>
-  				<input type="text" className="form-control" value={email} onChange={(e)=>setEmail(e.target.value)} />
+  				<input type="email" className="form-control" value={email} onChange={(e)=>setEmail(e.target.value)} />
 			</div>
 			<button type="button" className="btn btn-primary" onClick={()=>{actions.editContact(actions.addContact(actions.verifyName(name),actions.verifyAddress(address),actions.verifyPhone(phone),actions.verifyEmail(email)))
 			location.reload()}}>Save changes

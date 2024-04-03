@@ -17,11 +17,11 @@ export const Demo = () => {
 	
 	
 	return (
-		<div className="container">
+		<form className="container">
 			<h1>Add a contact to your list</h1>
 			<div className="mb-3">
   				<label className="form-label">Full name</label>
-  				<input type="text" className="form-control" value={name} onChange={(e)=>setName(e.target.value)} />
+  				<input  required type="text" className="form-control" value={name} onChange={(e)=>setName(e.target.value)} />
 			</div>
 			<div className="mb-3">
   				<label className="form-label">Address</label>
@@ -33,13 +33,13 @@ export const Demo = () => {
 			</div>
 			<div className="mb-3">
   				<label className="form-label">E-mail</label>
-  				<input type="text" className="form-control" value={email} onChange={(e)=>setEmail(e.target.value)} />
+  				<input type="email" className="form-control" value={email} onChange={(e)=>setEmail(e.target.value)} />
 			</div>
 			<button type="button" className="btn btn-primary" onClick={()=>{actions.addToList(actions.addContact(name,address,phone,email))
-			navigate("/")}}>
+				window.location.reload()}}>
   				Add contact
 			</button>
-
-		</div>
+			
+		</form>
 	);
 };
