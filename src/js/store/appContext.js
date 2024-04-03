@@ -22,6 +22,7 @@ const injectContext = PassedComponent => {
 		);
 
 		useEffect(() => {
+			state.actions.createList();
 			state.actions.getMyList();
 		}, []);
 

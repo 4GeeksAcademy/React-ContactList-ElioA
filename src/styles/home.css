@@ -1,0 +1,25 @@
+img{
+    border-radius: 50%;
+}
+
+.contactButton{
+    width: 40px;
+}
+.contact{
+    width: 900px;
+    padding: 20px;
+    margin-bottom: 10px;
+    display: flex;
+}
+.myDiv {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    text-align: center;
+  }
+  .buttons{
+    padding: 5px;
+  }
+  .contactText{
+    margin-left: 50px;
+  }
