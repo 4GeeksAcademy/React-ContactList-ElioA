@@ -1,4 +1,4 @@
-img{
+.listImg{
     border-radius: 50%;
 }
 
@@ -10,13 +10,16 @@ img{
     padding: 20px;
     margin-bottom: 10px;
     display: flex;
+    background-color: aliceblue;
 }
 .myDiv {
     display: flex;
     align-items: center;
     flex-direction: column;
     text-align: center;
+   
   }
+  
   .buttons{
     padding: 5px;
   }
